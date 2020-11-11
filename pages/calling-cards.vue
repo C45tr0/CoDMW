@@ -6,7 +6,7 @@
         <template v-for="card in cards">
           <div class="col-sm-6 col-md-4 col-lg-3" v-bind:key="card.image">
             <a v-bind:href="card.link" target="_blank">
-              <img v-bind:src="card.image" style="width: 100%; padding-bottom: 5px;" />
+              <img v-bind:src="card.image" class="calling-card-banner" />
             </a>
           </div>
         </template>
@@ -30,6 +30,11 @@ export default Vue.extend({
 </script>
 
 <style>
+.calling-card-banner {
+  width: 100%;
+  padding-bottom: 5px;
+}
+
 .container {
   margin: 0 auto;
   min-height: 100vh;
