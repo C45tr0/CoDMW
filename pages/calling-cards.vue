@@ -44,7 +44,7 @@
       </b-form-checkbox-group>
       <div class="calling-cards row">
         <template v-for="card in cards">
-          <div class="col-sm-6 col-md-4 col-lg-3 calling-card-container">
+          <div class="col-sm-6 col-md-4 col-lg-3 calling-card-container" v-bind:key="card.id">
             <a v-bind:href="card.link" target="_blank">
               <img v-if="card.image" v-bind:src="card.image" class="calling-card-banner" />
               <video v-if="card.video" autoplay="autoplay" muted="muted" playsinline loop="loop" class="calling-card-banner">
@@ -95,7 +95,14 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import cards from '~/calling-cards.json'
+import rawCards from '~/calling-cards.json'
+
+let i = 0;
+
+const cards = rawCards.map((card: any) => {
+  card.id = i++;
+  return card;
+});
 
 export default Vue.extend({
   data () {
@@ -110,7 +117,7 @@ export default Vue.extend({
     }
   },
   computed: {
-    cards: function() {
+    cards(): any[] {
       return cards.filter((card: any) => this.rarities.includes(card.rarity))
     }
   }
