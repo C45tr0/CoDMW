@@ -4,9 +4,12 @@
       <h1 class="title">Calling Cards</h1>
       <div class="calling-cards row">
         <template v-for="card in cards">
-          <div class="col-sm-6 col-md-4 col-lg-3" v-bind:key="card.image">
+          <div class="col-sm-6 col-md-4 col-lg-3" v-bind:key="card.image || card.video">
             <a v-bind:href="card.link" target="_blank">
-              <img v-bind:src="card.image" class="calling-card-banner" />
+              <img v-if="card.image" v-bind:src="card.image" class="calling-card-banner" />
+              <video v-if="card.video" autoplay="autoplay" muted="muted" playsinline loop="loop" class="calling-card-banner">
+                <source v-bind:src="card.video" v-bind:type="card.type">
+              </video>
             </a>
           </div>
         </template>
